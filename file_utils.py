@@ -107,7 +107,7 @@ def _DB_WRITE_BYTES(_DB, _OFFSET, _CONTENT, _PAGE_LIMIT):
     :param _PAGE_LIMIT:
     :return:
     """
-    print('file_offset', _OFFSET)
+    # print('file_offset', _OFFSET)
     if _OFFSET+len(_CONTENT) > _PAGE_LIMIT:
         raise Exception('PageOverflow')
     _DB.seek(_OFFSET)
@@ -169,7 +169,7 @@ def _WRITE_IN_PAGE(_DB, _CONTENT_BUFFER, _PAGE_NUM,_PAGE_OFFSET, _PAGE_SIZE, _HE
         if _CURR_TOTAL_PAGE <= _PAGE_NUM:
             _APPEND_PAGE(_DB, _PAGE_SIZE=_PAGE_SIZE)
         _PAGE_NUM_OFFSET = _PAGE_NUM * _PAGE_SIZE + _HEAD_SIZE + _INDEX_LEN + _LOG_LEN
-        print('page_num_offset', _PAGE_NUM_OFFSET, _PAGE_NUM_OFFSET+len(_CONTENT_BUFFER))
+        # print('page_num_offset', _PAGE_NUM_OFFSET, _PAGE_NUM_OFFSET+len(_CONTENT_BUFFER))
         return _DB_WRITE_BYTES(_DB, _PAGE_NUM_OFFSET, _CONTENT=_CONTENT_BUFFER, _PAGE_LIMIT=_PAGE_NUM_OFFSET+(_PAGE_SIZE-_LOG_LEN-_INDEX_LEN))
 
 
@@ -198,13 +198,13 @@ def _CONTENT_SET(_CONTENT, _DB, _PAGE_SIZE=1024, _TYPE=0x00, _INDEX_LEN=0x100, _
     """
     assert type(_CONTENT) == bytes
     _CONTENT_LEN = len(_CONTENT)
-    print(_CONTENT_LEN)
+    # print(_CONTENT_LEN)
     if _TYPE == 0x00:
         _PAGE_NUM = 0x00
         # fcntl.flock(_DB.fileno(), fcntl.LOCK_EX)
         for _CONTENT_OFFSET in range(0, _CONTENT_LEN, _INDEX_LEN):
             _CONTENT_BUFFER = _CONTENT[_CONTENT_OFFSET:_CONTENT_OFFSET+_INDEX_LEN]
-            print(_PAGE_NUM, _CONTENT_BUFFER)
+            # print(_PAGE_NUM, _CONTENT_BUFFER)
             _WRITE_IN_PAGE(_DB=_DB,
                            _CONTENT_BUFFER=_CONTENT_BUFFER,
                            _PAGE_NUM=_PAGE_NUM,
@@ -228,7 +228,7 @@ def _CONTENT_SET(_CONTENT, _DB, _PAGE_SIZE=1024, _TYPE=0x00, _INDEX_LEN=0x100, _
         # fcntl.flock(_DB.fileno(), fcntl.LOCK_EX)
         _CURR_INDEX = None
 
-        print(_PAGE_NUM, _OVER_OFFSET, _START_PAGE)
+        # print(_PAGE_NUM, _OVER_OFFSET, _START_PAGE)
 
         if _OVER_OFFSET > 0x00:
             _DB_WRITE_BYTES(_DB,
@@ -271,7 +271,7 @@ def _CONTENT_SET(_CONTENT, _DB, _PAGE_SIZE=1024, _TYPE=0x00, _INDEX_LEN=0x100, _
         _PAGE_NUM = _START_PAGE
         # fcntl.flock(_DB.fileno(), fcntl.LOCK_EX)
         _CURR_INDEX = None
-        print(_PAGE_NUM, _OVER_OFFSET, _START_PAGE)
+        # print(_PAGE_NUM, _OVER_OFFSET, _START_PAGE)
         # print(_PAGE_NUM, _OVER_OFFSET, _START_PAGE)
 
         if _OVER_OFFSET > 0x00:

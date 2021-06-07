@@ -1,7 +1,7 @@
 # OdysseyDB
 
 OdysseyDB:A lightweight migratable file based key-value database with redis-like api and more features, in memory of 2001:SpaceOdyssey by Stanley Kubrick.
-奥德赛：一个轻量级的可移植的提供redis-like api和更多新奇特性的对象存储键值对数据库，命名纪念斯坦利·库布里克的《2001：太空漫游》。
+奥德赛：一个轻量级的可移植的提供redis-like api和更多新奇特性的对象存储键值对数据库，命名纪念斯坦利·库布里克的《2001：太空奥德赛》。
 
 ## 为什么选择OdysseyDB
 1. 可迁移：类似sqlite3，即开即用，每一个数据库都是一个文件，简单的复制粘贴即可完成数据库的跨平台迁移，但有别于sqlite的关系型数据库，OdysseyDB为键值对数据库。可以轻易在不同环境下部署，在不同环境下接续运行同一程序时可动态载入持久化的运行时变量，支持热插拔，记录变量历史值和日志。不需要开启端口，但可以同时服务多个进程，并满足数据库的ACID特性。
